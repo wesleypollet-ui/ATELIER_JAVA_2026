@@ -16,6 +16,7 @@
 
     <%-- Division de la chaîne de chiffres séparés par des espaces --%>
     <% String[] tableauDeChiffres = chaine.split("\\s+"); %>
+    
     <p>Le tableau contient <%= nombres.length %> valeurs<br/>
     <% for (int i = 0; i < nombres.length; i++) { %>
     <p>Chiffre <%= i + 1 %> : <%= nombres[i] %></p>
