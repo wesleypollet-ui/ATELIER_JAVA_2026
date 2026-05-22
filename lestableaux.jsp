@@ -17,11 +17,12 @@
     <%-- Division de la chaîne de chiffres séparés par des espaces --%>
     <% String[] tableauDeChiffres = chaine.split("\\s+"); %>
     
-    <p>Le tableau contient <%= nombres.length %> valeurs<br/>
-    <% for (int i = 0; i < nombres.length; i++) { %>
-    <p>Chiffre <%= i + 1 %> : <%= nombres[i] %></p>
-    <% } %>
-    
+    <p>Le tableau contient <%= tableauDeChiffres.length %> valeurs<br/>
+    <% for (int i = 0; i < tableauDeChiffres.length; i++) { %>
+    <p>
+    Chiffre <%= i + 1 %> :
+    <%= tableauDeChiffres[i] %></p>
+
 <h2>Exercice 1 : La carré de la première valeur</h2>
 <p>Ecrire un programme afin d'afficher le carré de la première valeur</p>
 <%
