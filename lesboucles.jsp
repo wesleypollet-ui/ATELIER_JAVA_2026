@@ -6,21 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exercices sur les Boucles</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🌀 Exercices sur les Boucles</h1>
-            <p>Maîtrisez les structures itératives avec Java</p>
-        </header>
+    <header>
+        <div class="container">
+            <div class="logo">Code <span>X</span></div>
+            <a href="index.html" class="nav-link">← Retour</a>
+        </div>
+    </header>
 
-        <section>
-            <h2>📝 Entrez une valeur</h2>
+    <section class="hero">
+        <div class="container">
+            <h1>Exercices sur les Boucles</h1>
+            <p>Maîtrisez les structures itératives : for, while, do-while</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+
+        <h2>Saisir une valeur</h2>
             <form action="#" method="post">
-                <label for="inputValeur">Saisir le nombre d'étoiles :</label>
+                <label for="inputValeur">Nombre d'itérations :</label>
                 <input type="text" id="inputValeur" name="valeur" placeholder="Entrez un nombre...">
-                <input type="submit" value="Afficher les résultats">
+                <input type="submit" value="Générer">
             </form>
 
         </section>
@@ -28,127 +37,110 @@
         <%-- Récupération de la valeur saisie par l'utilisateur --%>
         <% String valeur = request.getParameter("valeur"); %>
         
-        <%-- Vérification de l'existence de la valeur --%>
         <% if (valeur != null && !valeur.isEmpty()) { %>
             <%int cpt = Integer.parseInt(valeur); %>
 
             <section>
-                <h2>⭐ Ligne d'étoiles</h2>
-                <p>Ligne simple générée avec une boucle for</p>
-                <div class="generated-output"><% for (int i = 1; i <= cpt; i++) { %>*<% } %></div>
-            </section>
+                <div class="container">
+                    <h2>Résultats</h2>
 
-            <section>
-                <h2>▭ Exercice 1 : Le carré d'étoiles</h2>
-                <p>Un carré d'étoiles de taille <%= cpt %> × <%= cpt %></p>
-                <div class="generated-output"><%
-                for(int i = 1; i <= cpt; i++) {
-                    for(int j = 1; j <= cpt; j++) {
-                        out.print("*");
-                    }
-                    out.print("\n");
-                }
-                %></div>
-            </section>
+                    <h3>Ligne simple</h3>
+                    <div class="generated-output"><% for (int i = 1; i <= cpt; i++) { %>*<% } %></div>
 
-            <section>
-                <h2>▲ Exercice 2 : Triangle rectangle gauche</h2>
-                <p>Triangle aligné sur la gauche</p>
-                <div class="generated-output"><%
-                for(int i = 1; i <= cpt; i++) {
-                    for(int j = 1; j <= i; j++) {
-                        out.print("*");
+                    <h3>Carré</h3>
+                    <div class="generated-output"><%
+                    for(int i = 1; i <= cpt; i++) {
+                        for(int j = 1; j <= cpt; j++) {
+                            out.print("*");
+                        }
+                        out.print("\n");
                     }
-                    out.print("\n");
-                }
-                %></div>
-            </section>
+                    %></div>
 
-            <section>
-                <h2>▼ Exercice 3 : Triangle rectangle inversé</h2>
-                <p>Triangle inversé</p>
-                <div class="generated-output"><%
-                for(int i = cpt; i >= 1; i--) {
-                    for(int j = 1; j <= i; j++) {
-                        out.print("*");
+                    <h3>Triangle - Croissant</h3>
+                    <div class="generated-output"><%
+                    for(int i = 1; i <= cpt; i++) {
+                        for(int j = 1; j <= i; j++) {
+                            out.print("*");
+                        }
+                        out.print("\n");
                     }
-                    out.print("\n");
-                }
-                %></div>
-            </section>
+                    %></div>
 
-            <section>
-                <h2>▶ Exercice 4 : Triangle rectangle aligné à droite</h2>
-                <p>Triangle aligné sur la droite</p>
-                <div class="generated-output"><%
-                for(int i = 1; i <= cpt; i++) {
-                    for(int j = 1; j <= cpt - i; j++) {
-                        out.print("&nbsp;");
+                    <h3>Triangle - Décroissant</h3>
+                    <div class="generated-output"><%
+                    for(int i = cpt; i >= 1; i--) {
+                        for(int j = 1; j <= i; j++) {
+                            out.print("*");
+                        }
+                        out.print("\n");
                     }
-                    for(int j = 1; j <= i; j++) {
-                        out.print("*");
-                    }
-                    out.print("\n");
-                }
-                %></div>
-            </section>
+                    %></div>
 
-            <section>
-                <h2>△ Exercice 5 : Triangle isocèle</h2>
-                <p>Triangle isocèle centré</p>
-                <div class="generated-output"><%
-                for(int i = 1; i <= cpt; i++) {
-                    for(int j = 1; j <= cpt - i; j++) {
-                        out.print("&nbsp;");
+                    <h3>Triangle - Aligné à droite</h3>
+                    <div class="generated-output"><%
+                    for(int i = 1; i <= cpt; i++) {
+                        for(int j = 1; j <= cpt - i; j++) {
+                            out.print("&nbsp;");
+                        }
+                        for(int j = 1; j <= i; j++) {
+                            out.print("*");
+                        }
+                        out.print("\n");
                     }
-                    for(int j = 1; j <= (2 * i - 1); j++) {
-                        out.print("*");
-                    }
-                    out.print("\n");
-                }
-                %></div>
-            </section>
+                    %></div>
 
-            <section>
-                <h2>◇ Exercice 6 : Le losange (demi)</h2>
-                <p>Losange avec partie montante et descendante</p>
-                <div class="generated-output"><%
-                for(int i = 1; i <= cpt; i++) {
-                    for(int j = 1; j <= cpt - i; j++) {
-                        out.print("&nbsp;");
+                    <h3>Triangle - Isocèle</h3>
+                    <div class="generated-output"><%
+                    for(int i = 1; i <= cpt; i++) {
+                        for(int j = 1; j <= cpt - i; j++) {
+                            out.print("&nbsp;");
+                        }
+                        for(int j = 1; j <= (2 * i - 1); j++) {
+                            out.print("*");
+                        }
+                        out.print("\n");
                     }
-                    for(int j = 1; j <= i; j++) {
-                        out.print("*");
-                    }
-                    out.print("\n");
-                }
-                for(int i = cpt - 1; i >= 1; i--) {
-                    for(int j = 1; j <= cpt - i; j++) {
-                        out.print("&nbsp;");
-                    }
-                    for(int j = 1; j <= i; j++) {
-                        out.print("*");
-                    }
-                    out.print("\n");
-                }
-                %></div>
-            </section>
+                    %></div>
 
-            <section>
-                <h2>× Exercice 7 : Table de multiplication</h2>
-                <p>Table de multiplication du nombre <%= cpt %></p>
-                <div class="result-box"><%
-                for(int i = 1; i <= 10; i++) {
-                    out.print(cpt + " × " + i + " = " + (cpt * i));
-                    out.print("<br>");
-                }
-                %></div>
+                    <h3>Losange</h3>
+                    <div class="generated-output"><%
+                    for(int i = 1; i <= cpt; i++) {
+                        for(int j = 1; j <= cpt - i; j++) {
+                            out.print("&nbsp;");
+                        }
+                        for(int j = 1; j <= i; j++) {
+                            out.print("*");
+                        }
+                        out.print("\n");
+                    }
+                    for(int i = cpt - 1; i >= 1; i--) {
+                        for(int j = 1; j <= cpt - i; j++) {
+                            out.print("&nbsp;");
+                        }
+                        for(int j = 1; j <= i; j++) {
+                            out.print("*");
+                        }
+                        out.print("\n");
+                    }
+                    %></div>
+
+                    <h3>Table de multiplication</h3>
+                    <div class="result-box"><%
+                    for(int i = 1; i <= 10; i++) {
+                        out.print(cpt + " × " + i + " = " + (cpt * i));
+                        out.print("<br>");
+                    }
+                    %></div>
+                </div>
             </section>
 
         <% } %>
 
-        <section>
-            <a href="index.html" class="back-link">← Retour au sommaire</a>
+        <section style="border-bottom: none; padding: 2rem 0;">
+            <div class="container">
+                <a href="index.html" class="nav-link">← Retour à l'accueil</a>
+            </div>
         </section>
     </div>
 </body>

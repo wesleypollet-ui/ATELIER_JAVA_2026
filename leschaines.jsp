@@ -6,73 +6,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exercices sur les Chaînes</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>📝 Exercices sur les Chaînes de caractères</h1>
-            <p>Manipulez et analysez du texte avec Java</p>
-        </header>
+    <header>
+        <div class="container">
+            <div class="logo">Code <span>X</span></div>
+            <a href="index.html" class="nav-link">← Retour</a>
+        </div>
+    </header>
 
-        <section>
-            <h2>🔤 Entrez votre texte</h2>
+    <section class="hero">
+        <div class="container">
+            <h1>Exercices sur les Chaînes</h1>
+            <p>Manipulation et analyse de texte</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2>Entrez votre texte</h2>
             <form action="#" method="post">
-                <label for="inputValeur">Saisir une chaîne (6 caractères minimum) :</label>
+                <label for="inputValeur">Texte (6 caractères minimum) :</label>
                 <input type="text" id="inputValeur" name="chaine" placeholder="Entrez du texte...">
-                <input type="submit" value="Analyser le texte">
+                <input type="submit" value="Analyser">
             </form>
         </section>
         <%-- Récupération des valeurs --%>
         <% String chaine = request.getParameter("chaine"); %>
         
         <% if (chaine != null) { %>
-            <%-- Obtention de la longueur de la chaîne --%>
             <% int longueurChaine = chaine.length(); %>
 
             <section>
-                <h2>📊 Infos générales sur votre texte</h2>
-                <div class="result-box">
-                    <p><strong>Texte saisi :</strong> "<%= chaine %>"</p>
-                    <p><strong>Longueur :</strong> <%= longueurChaine %> caractères</p>
-                </div>
-            </section>
+                <div class="container">
+                    <h2>Résultats</h2>
 
-            <%-- Extraction du 3° caractère dans votre chaine --%>
-            <% char caractereExtrait = chaine.charAt(2); %>
-            <section>
-                <h2>🔍 Le 3e caractère</h2>
-                <div class="result-box">
-                    <p>Le 3e caractère est : <strong><%= caractereExtrait %></strong></p>
-                </div>
-            </section>
+                    <h3>Infos générales</h3>
+                    <div class="result-box">
+                        <p><strong>Texte :</strong> "<%= chaine %>"</p>
+                        <p><strong>Longueur :</strong> <%= longueurChaine %> caractères</p>
+                    </div>
 
-            <%-- Obtention d'une sous-chaîne --%>
-            <% String sousChaine = chaine.substring(2, 6); %>
-            <section>
-                <h2>✂️ Sous-chaîne (caractères 3-6)</h2>
-                <div class="result-box">
-                    <p>Sous-chaîne : <strong><%= sousChaine %></strong></p>
-                </div>
-            </section>
+                    <% char caractereExtrait = chaine.charAt(2); %>
+                    <h3>3e caractère</h3>
+                    <div class="result-box">
+                        <p><strong><%= caractereExtrait %></strong></p>
+                    </div>
 
-            <%-- Recherche de la lettre "e" --%>
-            <% char recherche = 'e'; 
-               int position = chaine.indexOf(recherche); %>
-            <section>
-                <h2>🎯 Recherche du 'e'</h2>
-                <div class="result-box">
-                    <% if (position != -1) { %>
-                        <p>Le premier 'e' est trouvé à la position : <strong><%= position %></strong></p>
-                    <% } else { %>
-                        <p>Aucun 'e' trouvé dans votre texte.</p>
-                    <% } %>
-                </div>
-            </section>
+                    <% String sousChaine = chaine.substring(2, 6); %>
+                    <h3>Sous-chaîne (3-6)</h3>
+                    <div class="result-box">
+                        <p><strong><%= sousChaine %></strong></p>
+                    </div>
 
-            <section>
-                <h2>📈 Exercice 1 : Combien de 'e' dans le texte ?</h2>
-                <div class="result-box">
+                    <% char recherche = 'e'; int position = chaine.indexOf(recherche); %>
+                    <h3>Recherche du 'e'</h3>
+                    <div class="result-box">
+                        <% if (position != -1) { %>
+                            <p>Position : <strong><%= position %></strong></p>
+                        <% } else { %>
+                            <p>Aucun 'e' trouvé</p>
+                        <% } %>
+                    </div>
+
+                    <h3>Analyse du texte</h3>
                     <% int compteurE = 0;
                     for(int i = 0; i < chaine.length(); i++) {
                         if(chaine.charAt(i) == 'e') {
@@ -80,58 +77,45 @@
                         }
                     }
                     %>
-                    <p>Nombre de lettres 'e' : <strong><%= compteurE %></strong></p>
-                </div>
-            </section>
+                    <div class="result-box">
+                        <p>Nombre de 'e' : <strong><%= compteurE %></strong></p>
+                    </div>
 
-            <section>
-                <h2>📑 Exercice 2 : Affichage vertical</h2>
-                <p>Chaque caractère sur une nouvelle ligne</p>
-                <div class="generated-output"><%
-                for(int i = 0; i < chaine.length(); i++) {
-                    out.print(chaine.charAt(i));
-                    out.print("\n");
-                }
-                %></div>
-            </section>
-
-            <section>
-                <h2>🔂 Exercice 3 : Retour à la ligne sur espaces</h2>
-                <p>Sauts de ligne à chaque espace rencontré</p>
-                <div class="generated-output"><%
-                for(int i = 0; i < chaine.length(); i++) {
-                    char c = chaine.charAt(i);
-                    if(c == ' ') {
+                    <h3>Affichage vertical</h3>
+                    <div class="generated-output"><%
+                    for(int i = 0; i < chaine.length(); i++) {
+                        out.print(chaine.charAt(i));
                         out.print("\n");
-                    } else {
-                        out.print(c);
                     }
-                }
-                %></div>
-            </section>
+                    %></div>
 
-            <section>
-                <h2>🎲 Exercice 4 : Une lettre sur deux</h2>
-                <div class="generated-output"><%
-                for(int i = 0; i < chaine.length(); i = i + 2) {
-                    out.print(chaine.charAt(i));
-                }
-                %></div>
-            </section>
+                    <h3>Retour à la ligne sur espaces</h3>
+                    <div class="generated-output"><%
+                    for(int i = 0; i < chaine.length(); i++) {
+                        char c = chaine.charAt(i);
+                        if(c == ' ') {
+                            out.print("\n");
+                        } else {
+                            out.print(c);
+                        }
+                    }
+                    %></div>
 
-            <section>
-                <h2>🔄 Exercice 5 : Le texte en verlans</h2>
-                <p>Texte inversé</p>
-                <div class="generated-output"><%
-                for(int i = chaine.length() - 1; i >= 0; i--) {
-                    out.print(chaine.charAt(i));
-                }
-                %></div>
-            </section>
+                    <h3>Une lettre sur deux</h3>
+                    <div class="generated-output"><%
+                    for(int i = 0; i < chaine.length(); i = i + 2) {
+                        out.print(chaine.charAt(i));
+                    }
+                    %></div>
 
-            <section>
-                <h2>🔤 Exercice 6 : Voyelles et consonnes</h2>
-                <div class="result-box">
+                    <h3>Texte inversé</h3>
+                    <div class="generated-output"><%
+                    for(int i = chaine.length() - 1; i >= 0; i--) {
+                        out.print(chaine.charAt(i));
+                    }
+                    %></div>
+
+                    <h3>Voyelles et consonnes</h3>
                     <% int voyelles = 0;
                     int consonnes = 0;
                     for(int i = 0; i < chaine.length(); i++) {
@@ -145,20 +129,26 @@
                         }
                     }
                     %>
-                    <p><strong>Voyelles :</strong> <%= voyelles %></p>
-                    <p><strong>Consonnes :</strong> <%= consonnes %></p>
+                    <div class="result-box">
+                        <p><strong>Voyelles :</strong> <%= voyelles %></p>
+                        <p><strong>Consonnes :</strong> <%= consonnes %></p>
+                    </div>
                 </div>
             </section>
 
         <% } else { %>
             <section>
-                <h2>📌 Instructions</h2>
-                <p>Veuillez entrer un texte avec au moins 6 caractères pour voir les résultats.</p>
+                <div class="container">
+                    <h2>Instructions</h2>
+                    <p>Entrez un texte avec au moins 6 caractères pour voir l'analyse.</p>
+                </div>
             </section>
         <% } %>
 
-        <section>
-            <a href="index.html" class="back-link">← Retour au sommaire</a>
+        <section style="border-bottom: none; padding: 2rem 0;">
+            <div class="container">
+                <a href="index.html" class="nav-link">← Retour à l'accueil</a>
+            </div>
         </section>
     </div>
 </body>
