@@ -3,71 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercices Java - Space X Design</title>
+    <title>Code X - Atelier Java</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <div class="container">
-            <div class="logo">Code <span>X</span></div>
+        <div class="container header-inner">
+            <a href="index.html" class="logo">Code <span>X</span></a>
+            <nav class="nav-links">
+                <a href="lesboucles.jsp">Boucles</a>
+                <a href="lesconditions.jsp">Conditions</a>
+                <a href="leschaines.jsp">Chaînes</a>
+                <a href="lestableaux.jsp">Tableaux</a>
+                <a href="taches.jsp">Tâches</a>
+                <a href="Select_BDD.jsp">BDD</a>
+            </nav>
         </div>
     </header>
 
-    <section class="hero">
-        <div class="container">
-            <h1>Explorez l'univers de Java</h1>
-            <p>Exercices de programmation inspirés par la technologie Space X</p>
-            <img src="https://images.unsplash.com/photo-1446776877081-d282a0f896e2?w=1200&q=85" 
-                 alt="Space X Starship" class="hero-image">
-        </div>
-    </section>
-
-    <section>
-        <div class="container">
-            <h2>Chapitres Fondamentaux</h2>
-            <div class="card-grid">
-                <div class="card">
-                    <h3>🌀 Les Boucles</h3>
-                    <p>Maîtrisez les structures itératives for, while et do-while pour répéter des actions avec précision.</p>
-                    <p style="margin-top: 1.5rem;"><a href="lesboucles.jsp">Démarrer →</a></p>
+    <main>
+        <section class="hero">
+            <div class="container hero-grid">
+                <div class="hero-copy">
+                    <p class="eyebrow">Mission pédagogique</p>
+                    <h1>Décollez vers la maîtrise de Java</h1>
+                    <p>Une expérience sobre, rapide et immersive inspirée des interfaces spatiales pour apprendre les bases de Java.</p>
+                    <div class="hero-actions">
+                        <a href="lesboucles.jsp" class="btn btn-primary">Lancer un exercice</a>
+                        <a href="#chapitres" class="btn btn-secondary">Voir les chapitres</a>
+                    </div>
                 </div>
-
-                <div class="card">
-                    <h3>❓ Les Conditions</h3>
-                    <p>Apprenez à prendre des décisions dans votre code avec if, else et les opérateurs de comparaison.</p>
-                    <p style="margin-top: 1.5rem;"><a href="lesconditions.jsp">Démarrer →</a></p>
-                </div>
-
-                <div class="card">
-                    <h3>📝 Les Chaînes</h3>
-                    <p>Manipulez et analysez du texte pour comprendre les opérations sur les chaînes de caractères.</p>
-                    <p style="margin-top: 1.5rem;"><a href="leschaines.jsp">Démarrer →</a></p>
-                </div>
-
-                <div class="card">
-                    <h3>📊 Les Tableaux</h3>
-                    <p>Organisez et traitez des collections de données avec efficacité et précision.</p>
-                    <p style="margin-top: 1.5rem;"><a href="lestableaux.jsp">Démarrer →</a></p>
+                <div class="hero-visual">
+                    <div class="hero-card">
+                        <p class="hero-card-label">Explorez</p>
+                        <h2>4 modules</h2>
+                        <p>Du codage logique aux tableaux, chaque mission est conçue pour progresser vite.</p>
+                        <div class="hero-card-meta">
+                            <span>Précis</span>
+                            <span>Rapide</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section>
-        <div class="container">
-            <h2>Philosophie d'Apprentissage</h2>
-            <ol>
-                <li><strong>Clarté.</strong> Chaque concept expliqué simplement et directement.</li>
-                <li><strong>Pratique.</strong> Apprenez en faisant, pas en lisant.</li>
-                <li><strong>Progression.</strong> Chaque exercice construit sur les précédents.</li>
-                <li><strong>Excellence.</strong> Viser la qualité dans chaque ligne de code.</li>
-            </ol>
-        </div>
-    </section>
+        <section id="chapitres" class="section dark">
+            <div class="container">
+                <div class="section-header">
+                    <span class="eyebrow">Chapitres</span>
+                    <h2>Les fondamentaux en mode mission</h2>
+                </div>
+                <div class="card-grid">
+                    <article class="card">
+                        <h3>Boucles</h3>
+                        <p>Apprenez à répéter des actions efficacement avec for, while et do-while.</p>
+                        <a href="lesboucles.jsp" class="card-link">Commencer</a>
+                    </article>
+                    <article class="card">
+                        <h3>Conditions</h3>
+                        <p>Dirigez le flux de votre programme avec if, else if et else.</p>
+                        <a href="lesconditions.jsp" class="card-link">Commencer</a>
+                    </article>
+                    <article class="card">
+                        <h3>Chaînes</h3>
+                        <p>Analysez et transformez du texte pour maîtriser la manipulation de chaînes.</p>
+                        <a href="leschaines.jsp" class="card-link">Commencer</a>
+                    </article>
+                    <article class="card">
+                        <h3>Tableaux</h3>
+                        <p>Organisez et traitez des données structurées avec des tableaux Java.</p>
+                        <a href="lestableaux.jsp" class="card-link">Commencer</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="eyebrow">Philosophie</span>
+                    <h2>Apprendre Java comme une mission spatiale</h2>
+                </div>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>Clarté</h3>
+                        <p>Un design minimaliste qui fait ressortir le code et ses résultats.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Action</h3>
+                        <p>Chaque exercice est conçu pour être rapide à prendre en main et motivant.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Progression</h3>
+                        <p>Une navigation fluide qui accompagne votre apprentissage étape par étape.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <footer>
-        <div class="container">
-            <p>© 2026 Exercices Java. Inspiré par l'innovation de Space X.</p>
+        <div class="container footer-inner">
+            <p>© 2026 Code X — Interface inspirée par SpaceX.</p>
         </div>
     </footer>
 </body>
