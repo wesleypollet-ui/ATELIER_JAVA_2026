@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Connexion à MariaDB via JSP</title>
+    <link rel="stylesheet" href="style-clean.css">
 </head>
 <body>
     <h1>Exemple de connexion à MariaDB avec JSP</h1>

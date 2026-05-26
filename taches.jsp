@@ -3,6 +3,7 @@
 <html>
 <head>
 <title>Taches</title>
+<link rel="stylesheet" href="style-clean.css">
 </head>
 <body bgcolor=white>
 <h1>Saisir une tache</h1>
