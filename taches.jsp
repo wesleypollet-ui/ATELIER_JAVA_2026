@@ -134,19 +134,65 @@
                 tasks = (tasks==null)?new ArrayList<Task>():tasks;
             }
 
+            String filter = request.getParameter("filter");
+            if (filter == null) filter = "all";
             if (tasks.isEmpty()) {
                 out.println("<p>Aucune tâche pour le moment.</p>");
             } else {
         %>
+            <form method="get" style="margin:0 0 1rem 0">
+                <label>Filtrer :
+                    <select name="filter" onchange="this.form.submit()">
+                        <option value="all" <%= "all".equals(filter) ? "selected" : "" %>>Toutes</option>
+                        <option value="upcoming" <%= "upcoming".equals(filter) ? "selected" : "" %>>À venir</option>
+                        <option value="ongoing" <%= "ongoing".equals(filter) ? "selected" : "" %>>En cours</option>
+                        <option value="overdue" <%= "overdue".equals(filter) ? "selected" : "" %>>En retard</option>
+                        <option value="completed" <%= "completed".equals(filter) ? "selected" : "" %>>Terminé</option>
+                    </select>
+                </label>
+            </form>
                 <div style="display:grid;gap:1rem;margin-top:1rem">
                 <%
+                    java.time.LocalDate today = java.time.LocalDate.now();
                     for (Task t : tasks) {
+                        // compute dates and status
+                        java.time.LocalDate start = null; java.time.LocalDate due = null;
+                        try { if (t.startDate != null) start = java.time.LocalDate.parse(t.startDate); } catch(Exception ignored) {}
+                        try { if (t.dueDate != null) due = java.time.LocalDate.parse(t.dueDate); } catch(Exception ignored) {}
+
+                        String status = "En cours";
+                        if (t.completed) {
+                            status = "Terminé";
+                        } else if (start != null && start.isAfter(today)) {
+                            long days = java.time.temporal.ChronoUnit.DAYS.between(today, start);
+                            status = "À venir J-" + days;
+                        } else if (due != null && due.isBefore(today)) {
+                            long days = java.time.temporal.ChronoUnit.DAYS.between(due, today);
+                            status = "En retard J+" + days;
+                        } else {
+                            status = "En cours";
+                        }
+
+                        boolean show = true;
+                        if ("upcoming".equals(filter)) {
+                            show = (!t.completed && start != null && start.isAfter(today));
+                        } else if ("ongoing".equals(filter)) {
+                            boolean started = (start == null) || !start.isAfter(today);
+                            boolean notOverdue = (due == null) || !due.isBefore(today);
+                            show = (!t.completed && started && notOverdue);
+                        } else if ("overdue".equals(filter)) {
+                            show = (!t.completed && due != null && due.isBefore(today));
+                        } else if ("completed".equals(filter)) {
+                            show = t.completed;
+                        }
+
+                        if (!show) continue;
                 %>
                     <div class="card" style="display:flex;justify-content:space-between;align-items:flex-start;">
                         <div style="max-width:80%">
                             <h3 style="margin:0;">
                                 <%= t.title %>
-                                <% if (t.completed) { %> <small style="color:green">(Terminé)</small> <% } %>
+                                <small style="margin-left:0.5rem;color:#6b7280;font-weight:600;"><%= status %></small>
                             </h3>
                             <p style="color:#6b7280;margin:0.25rem 0;"><%= t.description %></p>
                             <p style="color:#6b7280;margin:0.25rem 0;font-size:0.9rem">

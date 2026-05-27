@@ -69,3 +69,8 @@ a{color:var(--accent)}
 /* Responsive */
 @media (max-width:900px){.hero-grid{grid-template-columns:1fr}.nav-links{display:none}}
 @media (max-width:480px){.hero{padding:3rem 0}.hero-copy h1{font-size:1.5rem}}
+
+/* Output and result styles used by exercises */
+.generated-output{white-space:pre-wrap;background:var(--card);padding:0.75rem;border-radius:8px;border:1px solid rgba(15,23,36,0.06);font-family:Menlo, Monaco, monospace;color:var(--text);overflow:auto}
+.result-box{background:var(--card);padding:0.75rem;border-radius:8px;border:1px solid rgba(15,23,36,0.03);color:var(--muted)}
+

@@ -46,69 +46,69 @@
                     <h2>Résultats</h2>
 
                     <h3>Ligne simple</h3>
-                    <div class="generated-output"><% for (int i = 1; i <= cpt; i++) { %>*<% } %></div>
+                    <pre class="generated-output"><% for (int i = 1; i <= cpt; i++) { %>*<% } %></pre>
 
                     <h3>Carré</h3>
-                    <div class="generated-output"><%
+                    <pre class="generated-output"><%
                     for(int i = 1; i <= cpt; i++) {
                         for(int j = 1; j <= cpt; j++) {
                             out.print("*");
                         }
                         out.print("\n");
                     }
-                    %></div>
+                    %></pre>
 
                     <h3>Triangle - Croissant</h3>
-                    <div class="generated-output"><%
+                    <pre class="generated-output"><%
                     for(int i = 1; i <= cpt; i++) {
                         for(int j = 1; j <= i; j++) {
                             out.print("*");
                         }
                         out.print("\n");
                     }
-                    %></div>
+                    %></pre>
 
                     <h3>Triangle - Décroissant</h3>
-                    <div class="generated-output"><%
+                    <pre class="generated-output"><%
                     for(int i = cpt; i >= 1; i--) {
                         for(int j = 1; j <= i; j++) {
                             out.print("*");
                         }
                         out.print("\n");
                     }
-                    %></div>
+                    %></pre>
 
                     <h3>Triangle - Aligné à droite</h3>
-                    <div class="generated-output"><%
+                    <pre class="generated-output"><%
                     for(int i = 1; i <= cpt; i++) {
                         for(int j = 1; j <= cpt - i; j++) {
-                            out.print("&nbsp;");
+                            out.print(" ");
                         }
                         for(int j = 1; j <= i; j++) {
                             out.print("*");
                         }
                         out.print("\n");
                     }
-                    %></div>
+                    %></pre>
 
                     <h3>Triangle - Isocèle</h3>
-                    <div class="generated-output"><%
+                    <pre class="generated-output"><%
                     for(int i = 1; i <= cpt; i++) {
                         for(int j = 1; j <= cpt - i; j++) {
-                            out.print("&nbsp;");
+                            out.print(" ");
                         }
                         for(int j = 1; j <= (2 * i - 1); j++) {
                             out.print("*");
                         }
                         out.print("\n");
                     }
-                    %></div>
+                    %></pre>
 
                     <h3>Losange</h3>
-                    <div class="generated-output"><%
+                    <pre class="generated-output"><%
                     for(int i = 1; i <= cpt; i++) {
                         for(int j = 1; j <= cpt - i; j++) {
-                            out.print("&nbsp;");
+                            out.print(" ");
                         }
                         for(int j = 1; j <= i; j++) {
                             out.print("*");
@@ -117,14 +117,14 @@
                     }
                     for(int i = cpt - 1; i >= 1; i--) {
                         for(int j = 1; j <= cpt - i; j++) {
-                            out.print("&nbsp;");
+                            out.print(" ");
                         }
                         for(int j = 1; j <= i; j++) {
                             out.print("*");
                         }
                         out.print("\n");
                     }
-                    %></div>
+                    %></pre>
 
                     <h3>Table de multiplication</h3>
                     <div class="result-box"><%
