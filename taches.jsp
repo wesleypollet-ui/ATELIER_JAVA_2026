@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="style-clean.css">
 </head>
 <body bgcolor=white>
+<%@ include file="header.jspf" %>
 <h1>Saisir une tache</h1>
 <form action="#" method="post">
     <label for="inputValeur">Saisir le nom d'une tache : </label>
@@ -34,5 +35,6 @@
     }
 %>
 
+<%@ include file="footer.jspf" %>
 </body>
 </html>

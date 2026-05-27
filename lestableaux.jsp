@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+<%@ include file="header.jspf" %>
     <div class="container">
         <header>
             <h1>📊 Exercices sur les Tableaux</h1>
@@ -158,5 +159,6 @@
             <a href="index.html" class="back-link">← Retour au sommaire</a>
         </section>
     </div>
+<%@ include file="footer.jspf" %>
 </body>
 </html>

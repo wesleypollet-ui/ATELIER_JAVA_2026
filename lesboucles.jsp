@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style-clean.css">
 </head>
 <body>
+<%@ include file="header.jspf" %>
     <header>
         <div class="container">
             <div class="logo">Code <span>X</span></div>
@@ -143,5 +144,6 @@
             </div>
         </section>
     </div>
+<%@ include file="footer.jspf" %>
 </body>
 </html>

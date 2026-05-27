@@ -1,0 +1,13 @@
+<header>
+    <div class="container header-inner">
+        <a href="index.html" class="logo">Code <span>X</span></a>
+        <nav class="nav-links">
+            <a href="lesboucles.jsp">Boucles</a>
+            <a href="lesconditions.jsp">Conditions</a>
+            <a href="leschaines.jsp">Chaînes</a>
+            <a href="lestableaux.jsp">Tableaux</a>
+            <a href="taches.jsp">Tâches</a>
+            <a href="Select_BDD.jsp">BDD</a>
+        </nav>
+    </div>
+</header>

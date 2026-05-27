@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style-clean.css">
 </head>
 <body>
+<%@ include file="header.jspf" %>
     <h1>Exemple de connexion à MariaDB avec JSP</h1>
     <% 
     String url = "jdbc:mariadb://localhost:3306/films";
@@ -64,5 +65,6 @@
 Votre travail est de créer votre code afin de répondre aux besoins définis ci-dessus. L'application exploitera le language JSP (JAVA) pour interagir avec la base de données MariaDB.
 L’application pourra être enrichie avec des fonctionnalités supplémentaires telles que des recommandations de livres, des notifications pour les retours en retard, ou encore des rapports statistiques sur l'utilisation des livres pour améliorer l'expérience utilisateur et la gestion de la bibliothèque.
 </p>
+<%@ include file="footer.jspf" %>
 </body>
 </html>
