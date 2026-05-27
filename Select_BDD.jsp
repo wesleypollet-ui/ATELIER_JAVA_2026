@@ -63,18 +63,7 @@
 <h2>Exercice 4 : La valeur maximum</h2>
 <p>Créer un formulaire pour saisir un nouveau film dans la base de données</p>
 <hr>
-<h3>Projet Bibliothèque</h3>
-<p>Votre projet consiste à concevoir et développer une application de gestion de bibliothèque moderne qui simplifie le processus de prêt et de retour de livres. Les fonctionnalités attendues dans le cadre de ce projet sont les suivantes :
-<ul>
-<li>L’enregistrement et la suppression de livres.</li>
-<li>La recherche de livres disponibles.</li>
-<li>L'emprunt possible d'un livre par un utilisateur.</li>
-<li>La gestion des utilisateurs.</li>
-<li>La gestion des stocks.</li>
-</ul>
-Votre travail est de créer votre code afin de répondre aux besoins définis ci-dessus. L'application exploitera le language JSP (JAVA) pour interagir avec la base de données MariaDB.
-L’application pourra être enrichie avec des fonctionnalités supplémentaires telles que des recommandations de livres, des notifications pour les retours en retard, ou encore des rapports statistiques sur l'utilisation des livres pour améliorer l'expérience utilisateur et la gestion de la bibliothèque.
-</p>
+<p>Exercices et exemples pour manipuler une base MariaDB via JSP.</p>
 <%@ include file="footer.jspf" %>
 </body>
 </html>
