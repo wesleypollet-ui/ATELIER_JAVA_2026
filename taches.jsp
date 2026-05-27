@@ -281,105 +281,9 @@
 </div>
 
 <%@ include file="footer.jspf" %>
-
 <script>
-// Build tasksData JS from server-side tasks for calendar
+// Build tasksData and render calendar in a single script
 var tasksData = [];
-<%
-    // Emit tasks as JS array safely
-    for (Task t : tasks) {
-        String safeTitle = (t.title==null) ? "" : t.title.replace("\\","\\\\").replace("\"","\\\"").replace("\n","\\n").replace("\r","\\r");
-        String safeDesc = (t.description==null) ? "" : t.description.replace("\\","\\\\").replace("\"","\\\"").replace("\n","\\n").replace("\r","\\r");
-        out.print("tasksData.push({id:\""+t.id+"\",title:\""+safeTitle+"\",description:\""+safeDesc+"\",startDate:\"");
-        out.print(t.startDate==null?"":t.startDate);
-        out.print("\",dueDate:\"");
-        out.print(t.dueDate==null?"":t.dueDate);
-        out.print("\",completed:");
-        out.print(t.completed);
-        out.print("});\n");
-    }
-%>
-
-// Calendar rendering (with timeline bands)
-(function(){
-    var cur = new Date();
-    var year = cur.getFullYear(), month = cur.getMonth();
-    var calendarEl = document.getElementById('calendar');
-    var monthLabel = document.getElementById('monthLabel');
-    var tasksForDay = document.getElementById('tasksForDay');
-
-    function render(){
-        calendarEl.innerHTML='';
-        var first = new Date(year, month, 1);
-        var startDay = (first.getDay()+6)%7; // make Monday=0
-        var daysInMonth = new Date(year, month+1, 0).getDate();
-        monthLabel.textContent = first.toLocaleString(undefined,{month:'long', year:'numeric'});
-
-        // week day headers
-        var days = ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
-        for(var i=0;i<7;i++){ var h = document.createElement('div'); h.className='muted'; h.style.fontWeight='600'; h.textContent=days[i]; calendarEl.appendChild(h); }
-
-        for(var i=0;i<startDay;i++){ var e=document.createElement('div'); e.className='day muted'; e.textContent=''; calendarEl.appendChild(e); }
-        for(var d=1; d<=daysInMonth; d++){
-            var e = document.createElement('div'); e.className='day';
-            e.dataset.date = year+'-'+String(month+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
-            var title = document.createElement('div'); title.style.fontWeight='600'; title.textContent = d; e.appendChild(title);
-            calendarEl.appendChild(e);
-        }
-
-        // render task bars across days
-        tasksData.forEach(function(t){
-            if(!t.dueDate && !t.startDate) return;
-            var s = t.startDate?new Date(t.startDate):new Date(year,month,1);
-            var eDate = t.dueDate?new Date(t.dueDate):s;
-            // clamp to current month
-            var from = new Date(Math.max(new Date(year,month,1).getTime(), s.getTime()));
-            var to = new Date(Math.min(new Date(year,month+1,0).getTime(), eDate.getTime()));
-            if (from>to) return;
-            var startDayOfMonth = from.getDate();
-            var endDayOfMonth = to.getDate();
-            for(var day=startDayOfMonth; day<=endDayOfMonth; day++){
-                var dateStr = year+'-'+String(month+1).padStart(2,'0')+'-'+String(day).padStart(2,'0');
-                var cell = calendarEl.querySelector('[data-date="'+dateStr+'"]');
-                if(!cell) continue;
-                var bar = document.createElement('div');
-                bar.className='task-bar';
-                bar.style.background = (t.color? t.color : '#2563EB');
-                bar.textContent = t.title;
-                bar.title = t.title + ' - ' + t.description;
-                cell.appendChild(bar);
-            }
-        });
-
-        // add click handlers
-        var cells = calendarEl.querySelectorAll('.day');
-        cells.forEach(function(c){ c.addEventListener('click', function(){ showTasksFor(this.dataset.date); }); });
-    }
-
-    function showTasksFor(date){
-        var filtered = tasksData.filter(function(t){
-            if (t.dueDate && t.startDate) return (t.startDate<=date && t.dueDate>=date);
-            if (t.dueDate) return t.dueDate===date;
-            if (t.startDate) return t.startDate===date;
-            return false;
-        });
-        if(filtered.length===0){ tasksForDay.innerHTML = '<p>Aucune tâche pour '+date+'</p>'; return; }
-        var html = '<h3>Tâches pour ' + date + '</h3><ul>';
-        filtered.forEach(function(t){ html += '<li><span style="display:inline-block;width:12px;height:12px;background:'+ (t.color? t.color:'#2563EB') +';border-radius:50%;margin-right:8px;vertical-align:middle"></span><strong>'+escapeHtml(t.title)+'</strong> - '+escapeHtml(t.description)+' '+(t.completed?'<em>(Terminé)</em>':'')+'</li>'; });
-        html += '</ul>';
-        tasksForDay.innerHTML = html;
-    }
-
-    function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\"/g,'&quot;'); }
-
-    document.getElementById('prevMonth').addEventListener('click', function(){ month--; if(month<0){ month=11; year--; } render(); });
-    document.getElementById('nextMonth').addEventListener('click', function(){ month++; if(month>11){ month=0; year++; } render(); });
-
-    // populate tasksData from server
-    // same server emission as before but include color and startDate
-})();
-
-// emit tasksData from server
 <%
     for (Task t : tasks) {
         String safeTitle = (t.title==null) ? "" : t.title.replace("\\","\\\\").replace("\"","\\\"").replace("\n","\\n").replace("\r","\\r");
@@ -395,8 +299,6 @@ var tasksData = [];
     }
 %>
 
-<script>
-// re-render with tasksData now populated
 (function(){
     var cur = new Date();
     var year = cur.getFullYear(), month = cur.getMonth();
@@ -407,7 +309,7 @@ var tasksData = [];
     function render(){
         calendarEl.innerHTML='';
         var first = new Date(year, month, 1);
-        var startDay = (first.getDay()+6)%7; // make Monday=0
+        var startDay = (first.getDay()+6)%7; // Monday=0
         var daysInMonth = new Date(year, month+1, 0).getDate();
         monthLabel.textContent = first.toLocaleString(undefined,{month:'long', year:'numeric'});
 
@@ -424,7 +326,7 @@ var tasksData = [];
 
     function showTasksFor(date){ var filtered = tasksData.filter(function(t){ if (t.dueDate && t.startDate) return (t.startDate<=date && t.dueDate>=date); if (t.dueDate) return t.dueDate===date; if (t.startDate) return t.startDate===date; return false; }); if(filtered.length===0){ tasksForDay.innerHTML = '<p>Aucune tâche pour '+date+'</p>'; return; } var html = '<h3>Tâches pour ' + date + '</h3><ul>'; filtered.forEach(function(t){ html += '<li><span style="display:inline-block;width:12px;height:12px;background:'+ (t.color? t.color:'#2563EB') +';border-radius:50%;margin-right:8px;vertical-align:middle"></span><strong>'+escapeHtml(t.title)+'</strong> - '+escapeHtml(t.description)+' '+(t.completed?'<em>(Terminé)</em>':'')+'</li>'; }); html += '</ul>'; tasksForDay.innerHTML = html; }
 
-    function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\"/g,'&quot;'); }
+    function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
     document.getElementById('prevMonth').addEventListener('click', function(){ month--; if(month<0){ month=11; year--; } render(); });
     document.getElementById('nextMonth').addEventListener('click', function(){ month++; if(month>11){ month=0; year++; } render(); });
@@ -432,5 +334,3 @@ var tasksData = [];
     render();
 })();
 </script>
-</body>
-</html>
