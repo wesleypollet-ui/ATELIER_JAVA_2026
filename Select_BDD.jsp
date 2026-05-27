@@ -11,34 +11,44 @@
 <%@ include file="header.jspf" %>
     <h1>Exemple de connexion à MariaDB avec JSP</h1>
     <% 
-    String url = "jdbc:mariadb://localhost:3306/films";
-    String user = "cnam";
-    String password = "cnam";
+    // Les identifiants de connexion doivent être fournis via des variables d'environnement
+    String url = System.getenv("DB_URL");
+    String user = System.getenv("DB_USER");
+    String password = System.getenv("DB_PASSWORD");
 
-        // Charger le pilote JDBC (pilote disponible dans WEB-INF/lib)
-        Class.forName("org.mariadb.jdbc.Driver");
+    if (url == null || user == null || password == null) {
+    %>
+        <p style="color:orange;">Configuration DB manquante. Définir DB_URL, DB_USER, DB_PASSWORD dans les variables d'environnement du serveur.</p>
+    <%
+    } else {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            // Charger le pilote (doit être présent dans WEB-INF/lib)
+            Class.forName("org.mariadb.jdbc.Driver");
+            conn = DriverManager.getConnection(url, user, password);
 
-        // Établir la connexion
-        Connection conn = DriverManager.getConnection(url, user, password);
-        // Exemple de requête SQL
-        String sql = "SELECT idFilm, titre, annee FROM Film WHERE annee >= 2000";
-        PreparedStatement pstmt = conn.prepareStatement(sql);
-        ResultSet rs = pstmt.executeQuery();
+            // Exemple de requête SQL
+            String sql = "SELECT idFilm, titre, annee FROM Film WHERE annee >= 2000";
+            pstmt = conn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
 
-        // Afficher les résultats (à adapter selon vos besoins)
-        while (rs.next()) {
-            String colonne1 = rs.getString("idFilm");
-            String colonne2 = rs.getString("titre");
-            String colonne3 = rs.getString("annee");
-            // Faites ce que vous voulez avec les données...
-            //Exemple d'affichage de 2 colonnes
-            out.println("id : " + colonne1 + ", titre : " + colonne2 + ", année : " + colonne3 + "</br>");
+            // Afficher les résultats
+            while (rs.next()) {
+                String colonne1 = rs.getString("idFilm");
+                String colonne2 = rs.getString("titre");
+                String colonne3 = rs.getString("annee");
+                out.println("id : " + colonne1 + ", titre : " + colonne2 + ", année : " + colonne3 + "</br>");
+            }
+        } catch (Exception e) {
+            out.println("<p style='color:red;'>Erreur lors de la connexion à la base de données: " + e.getMessage() + "</p>");
+        } finally {
+            if (rs != null) try { rs.close(); } catch (Exception ignored) {}
+            if (pstmt != null) try { pstmt.close(); } catch (Exception ignored) {}
+            if (conn != null) try { conn.close(); } catch (Exception ignored) {}
         }
-
-        // Fermer les ressources 
-        rs.close();
-        pstmt.close();
-        conn.close();
+    }
     %>
 
 <h2>Exercice 1 : Les films entre 2000 et 2015</h2>
